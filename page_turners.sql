@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`books` (
   `quantity_in_stock` INT NULL DEFAULT NULL,
   `user_id` INT NOT NULL,
   `created_at` DATETIME NULL DEFAULT NOW(),
-  `updated_at` DATETIME NULL DEFAULT  NOW() ON UPDATE NOW(),
+  `updated_at` DATETIME NULL DEFAULT NOW() ON UPDATE NOW(),
   PRIMARY KEY (`id`),
   INDEX `fk_books_users_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_books_users`
