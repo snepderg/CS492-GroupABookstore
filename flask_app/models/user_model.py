@@ -18,7 +18,6 @@ class User:
   @staticmethod
   def validate(data):
     is_valid = True
-
     # First name validation
     if len(data['first_name']) < 1:
       is_valid = False
@@ -47,6 +46,7 @@ class User:
       if potential_user:
         is_valid = False
         flash('Email is currently in use. Please try another email or log in.', 'reg')
+        ##if dundermifflin is the domain then they are automatically admin 
     
     # Password validation
     if len(data['password']) < 1:
