@@ -14,8 +14,9 @@ NOTE: This project utilizes a local MySQL server. If you do not have MySQL insta
 4. Navigate to the project directory in your terminal.
 5. Run `pipenv install` to install the project dependencies.
 6. Run `pipenv shell` to activate the virtual environment.
-7. Run `python server.py` to start the development server.
-8. Open your web browser and navigate to `http://localhost:5001/` to view the application.
+7. Run the file: page_turners.sql to create the database schema.
+8. Run `python server.py` to start the development server.
+9. Open your web browser and navigate to `http://localhost:5001/` to view the application.
 (Note that the application is using port 5001 to avoid conflicts with MacOS.)
 
 
