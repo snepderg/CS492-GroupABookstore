@@ -1,8 +1,10 @@
 # CS492 - Group A Capstone Project
 ## Bookstore Management Application: PageTurners
 
-### Installation Instructions
-## NOTE: This project utilizes a local MySQL server. If you do not have MySQL installed on your machine, you will need to install it before running the application. You can download MySQL from the official website: https://dev.mysql.com/downloads/
+
+## Installation Instructions
+
+NOTE: This project utilizes a local MySQL server. If you do not have MySQL installed on your machine, you will need to install it before running the application. You can download MySQL from the official website: https://dev.mysql.com/downloads/
 
 1. Install Python 3 on your machine. You can download the latest version of Python from the official website: https://www.python.org/downloads/
 2. install pipenv if you don't have it installed already. You can install pipenv by running one of the following commands in your terminal:
