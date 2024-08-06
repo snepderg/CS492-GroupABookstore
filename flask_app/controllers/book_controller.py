@@ -14,6 +14,11 @@ def process_book_data():
   Book.create(request.form)
   return redirect('/dashboard')
 
+@app.route('/book/<int:id>/view')
+def view_book(id):
+  book = Book.get_by_id({'id': id})
+  return render_template('view_book.html', book = book)
+
 @app.route('/book/<int:id>/edit')
 def edit_book(id):
   if 'user_id' not in session:
