@@ -21,5 +21,10 @@
         <a href="/users/logout">Log Out</a>
       </div>
     </div>
+    <li>
+      {% for book in books %}
+      <p>{{book.title}}</p>
+      {% endfor %}
+    </li>
   </body>
 </html>
