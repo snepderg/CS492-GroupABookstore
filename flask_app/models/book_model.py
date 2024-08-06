@@ -19,7 +19,7 @@ class Book:
         VALUES (%(title)s, %(genre)s, %(author)s, %(price)s, %(quantity_in_stock)s, %(user_id)s);
     """
     return connectToMySQL(cls.db).query_db(query, data)
-  
+
   @classmethod
   def get_all(cls):
     query = """
@@ -30,3 +30,13 @@ class Book:
     for book in results:
       books.append(cls(book))
     return books
+
+  @classmethod
+  def get_by_id(cls, data):
+    query = """
+          SELECT * FROM books WHERE id = %(id)s;
+      """
+    result = connectToMySQL(cls.db).query_db(query, data)
+    if len(result) < 1:
+      return False
+    return cls(result[0])

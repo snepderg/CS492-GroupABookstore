@@ -20,7 +20,7 @@ def edit_book(id):
   if 'user_id' not in session:
     return redirect('/')
 
-  book = Book.get_one({'id': id})
+  book = Book.get_by_id({'id': id})
 
   if not book:
     return redirect('/')
