@@ -2,6 +2,7 @@ from flask_app import app
 from flask import render_template, session, redirect, request, flash, url_for
 from flask_bcrypt import Bcrypt
 from flask_app.models.user_model import User
+from flask_app.models.book_model import Book
 import re
 
 bcrypt = Bcrypt(app)
@@ -53,7 +54,6 @@ def process_login():
     else:
       return redirect(url_for('admin_dashboard'))
 
-
 @app.route('/users/logout')
 def logout():
     del session['user_id']
@@ -64,7 +64,8 @@ def dashboard():
   if 'user_id' not in session:
     return redirect('/')
   one_user = User.get_by_id({'id':session['user_id']})
-  return render_template('dashboard.html', one_user = one_user)
+  books = Book.get_all()
+  return render_template('dashboard.html', one_user = one_user, books = books)
 
 @app.route('/admin_dashboard')
 def admin_dashboard():
