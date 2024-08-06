@@ -12,6 +12,7 @@ class User:
     self.last_name = data['last_name']
     self.email = data['email']
     self.password = data['password']
+    self.admin = data['admin']
     self.created_at = data['created_at']
     self.updated_at = data['updated_at']
 
@@ -61,8 +62,8 @@ class User:
   @classmethod
   def create(cls, data):
     query = """
-        INSERT INTO users (first_name, last_name, email, password)
-        VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);
+        INSERT INTO users (first_name, last_name, email, admin,  password)
+        VALUES (%(first_name)s, %(last_name)s, %(email)s, %(admin)s, %(password)s);
     """
     return connectToMySQL(cls.db).query_db(query, data)
   
