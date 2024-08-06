@@ -7,6 +7,7 @@ class Book:
     self.title = data['title']
     self.genre = data['genre']
     self.author = data['author']
+    self.price = data['price']
     self.quantity_in_stock = data['quantity_in_stock']
     self.user_id = data['user_id']
     self.created_at = data['created_at']
