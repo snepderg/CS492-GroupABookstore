@@ -38,7 +38,7 @@ NOTE: This project utilizes a local MySQL server. If you do not have MySQL insta
     - `pipenv shell`
 4. Run the following command to start the development server:
     - `python server.py`
-5. Open a web browser and navigate to `http://localhost:5001/` to access the application.
+5. Open a web browser and navigate to `127.0.0.1:5001/` to access the application.
 
 
 ## Testing the Application's Functionality
