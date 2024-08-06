@@ -13,3 +13,26 @@ def new_book():
 def process_book_data():
   Book.create(request.form)
   return redirect('/dashboard')
+
+@app.route('/book/<int:id>/view')
+def view_book(id):
+  book = Book.get_by_id({'id': id})
+  return render_template('view_book.html', book = book)
+
+@app.route('/book/<int:id>/edit')
+def edit_book(id):
+  if 'user_id' not in session:
+    return redirect('/')
+
+  book = Book.get_by_id({'id': id})
+
+  if not book:
+    return redirect('/')
+
+  return render_template('edit_book.html', book = book)
+
+@app.route('/book/<int:id>/update', methods=['POST'])
+def update_book(id):
+  book_data = {**request.form, 'id': id}
+  Book.update(book_data)
+  return redirect('/dashboard')

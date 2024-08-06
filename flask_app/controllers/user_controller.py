@@ -21,12 +21,12 @@ def index():
 @app.route('/users/register', methods=['POST'])
 def process_registration():
     if not User.validate(request.form):
-      return redirect('/')  
+      return redirect('/')
     pass_hash = bcrypt.generate_password_hash(request.form['password'])
     if re.search(r'@dundermifflin\.com$', request.form['email']):
       admin = 1
     else:
-      admin = 0 
+      admin = 0
     data = {
       **request.form,
       'admin': admin,
@@ -77,5 +77,5 @@ def admin_dashboard():
   if session.get('admin') != 1:
     return redirect('/dashboard')
   one_user = User.get_by_id({'id':session['user_id']})
-  return render_template('admin_dashboard.html', one_user = one_user)
-  
+  books = Book.get_all()
+  return render_template('admin_dashboard.html', one_user = one_user, books = books)

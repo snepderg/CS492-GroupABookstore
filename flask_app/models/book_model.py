@@ -7,6 +7,7 @@ class Book:
     self.title = data['title']
     self.genre = data['genre']
     self.author = data['author']
+    self.price = data['price']
     self.quantity_in_stock = data['quantity_in_stock']
     self.user_id = data['user_id']
     self.created_at = data['created_at']
@@ -19,14 +20,32 @@ class Book:
         VALUES (%(title)s, %(genre)s, %(author)s, %(price)s, %(quantity_in_stock)s, %(user_id)s);
     """
     return connectToMySQL(cls.db).query_db(query, data)
-  
+
+  @classmethod
+  def update(cls, data):
+    query = """
+        UPDATE books SET title = %(title)s, genre = %(genre)s, author = %(author)s, price = %(price)s, quantity_in_stock = %(quantity_in_stock)s, user_id = %(user_id)s
+        WHERE id = %(id)s;
+    """
+    return connectToMySQL(cls.db).query_db(query, data)
+
   @classmethod
   def get_all(cls):
     query = """
-          SELECT * FROM books;
+        SELECT * FROM books;
       """
     results = connectToMySQL(cls.db).query_db(query)
     books = []
     for book in results:
       books.append(cls(book))
     return books
+
+  @classmethod
+  def get_by_id(cls, data):
+    query = """
+        SELECT * FROM books WHERE id = %(id)s;
+      """
+    result = connectToMySQL(cls.db).query_db(query, data)
+    if len(result) < 1:
+      return False
+    return cls(result[0])
