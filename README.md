@@ -32,11 +32,13 @@ NOTE: This project utilizes a local MySQL server. If you do not have MySQL insta
 
 ## Setting up the Application
 1. Open a terminal and navigate to the project directory.
-2. Run the following command to activate the virtual environment:
+2. Run the following command to install the project dependencies:
+    - `pipenv install`
+3. Run the following command to activate the virtual environment:
     - `pipenv shell`
-3. Run the following command to start the development server:
+4. Run the following command to start the development server:
     - `python server.py`
-4. Open a web browser and navigate to `http://localhost:5001/` to access the application.
+5. Open a web browser and navigate to `http://localhost:5001/` to access the application.
 
 
 ## Testing the Application's Functionality
