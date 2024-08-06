@@ -26,7 +26,7 @@ class User:
     elif len(data['first_name']) < 2:
       is_valid = False
       flash('First name must be at least 2 characters.', 'reg')
-    
+
     # Last name validation
     if len(data['last_name']) < 1:
       is_valid = False
@@ -47,8 +47,8 @@ class User:
       if potential_user:
         is_valid = False
         flash('Email is currently in use. Please try another email or log in.', 'reg')
-        ##if dundermifflin is the domain then they are automatically admin 
-    
+        ##if dundermifflin is the domain then they are automatically admin
+
     # Password validation
     if len(data['password']) < 1:
       is_valid = False
@@ -58,7 +58,7 @@ class User:
       flash('Passwords do not match.', 'reg')
 
     return is_valid
-  
+
   @classmethod
   def create(cls, data):
     query = """
@@ -66,7 +66,7 @@ class User:
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(admin)s, %(password)s);
     """
     return connectToMySQL(cls.db).query_db(query, data)
-  
+
   @classmethod
   def get_by_email(cls, data):
     query = """
@@ -77,7 +77,7 @@ class User:
     if results:
       return cls(results[0])
     return False
-  
+
   @classmethod
   def get_by_id(cls, data):
     query = """

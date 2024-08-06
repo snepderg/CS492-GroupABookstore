@@ -21,9 +21,17 @@ class Book:
     return connectToMySQL(cls.db).query_db(query, data)
 
   @classmethod
+  def update(cls, data):
+    query = """
+        UPDATE books SET title = %(title)s, genre = %(genre)s, author = %(author)s, price = %(price)s, quantity_in_stock = %(quantity_in_stock)s, user_id = %(user_id)s
+        WHERE id = %(id)s;
+    """
+    return connectToMySQL(cls.db).query_db(query, data)
+
+  @classmethod
   def get_all(cls):
     query = """
-          SELECT * FROM books;
+        SELECT * FROM books;
       """
     results = connectToMySQL(cls.db).query_db(query)
     books = []
@@ -34,7 +42,7 @@ class Book:
   @classmethod
   def get_by_id(cls, data):
     query = """
-          SELECT * FROM books WHERE id = %(id)s;
+        SELECT * FROM books WHERE id = %(id)s;
       """
     result = connectToMySQL(cls.db).query_db(query, data)
     if len(result) < 1:
