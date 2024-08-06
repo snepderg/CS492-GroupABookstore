@@ -44,6 +44,7 @@ NOTE: This project utilizes a local MySQL server. If you do not have MySQL insta
 ## Testing the Application's Functionality
 ### Testing Registration and Login
 1. On the homepage, enter the following details to register an account:
+- Note: Administrator accounts must be created by signing up with the domain "@dundermifflin.com."
     - First Name
     - Last Name
     - Email
