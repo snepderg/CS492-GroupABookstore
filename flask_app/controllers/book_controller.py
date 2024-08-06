@@ -13,3 +13,16 @@ def new_book():
 def process_book_data():
   Book.create(request.form)
   return redirect('/dashboard')
+
+# setup route for /book/<int:id>/edit
+@app.route('/book/<int:id>/edit')
+def edit_book(id):
+  if 'user_id' not in session:
+    return redirect('/')
+
+  book = Book.get_one({'id': id})
+
+  if not book:
+    return redirect('/')
+
+  return render_template('edit_book.html', book = book)
