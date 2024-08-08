@@ -1,0 +1,180 @@
+:root {
+    --primary-color: var(--bs-light); /* base color for backgrounds, etc */
+    /*Intense and Mild colors are luminosity aware colors, with intense colors polarizing towards either white or black, whichever is closer. Mild also polarizes towards white or black, but whichever is farther.*/
+    --primary-color-polarizer-reference: hsl(from var(--primary-color) 0 0% calc(clamp(-0.001, calc(l / 50 - 1), 0.001) * 1000));
+    --primary-color-intense-reference: hsl(from var(--primary-color-polarizer-reference) 0 0% calc(l * 50 + 50));
+    --primary-color-mild-reference: hsl(from var(--primary-color-polarizer-reference) 0 0% calc(l * -50 + 50));
+
+    --primary-color-light: color-mix(in srgb, var(--primary-color), rgb(255,255,255) 15%);
+    --primary-color-dark: color-mix(in srgb, var(--primary-color), rgb(0,0,0) 15%);
+    --primary-color-intense: color-mix(in srgb, var(--primary-color), var(--primary-color-intense-reference) 15%);
+    --primary-color-intenser: color-mix(in srgb, var(--primary-color), var(--primary-color-intense-reference) 25%);
+    --primary-color-intensest: color-mix(in srgb, var(--primary-color), var(--primary-color-intense-reference) 35%);
+    --primary-color-mild: color-mix(in srgb, var(--primary-color), var(--primary-color-mild-reference) 15%);
+    --primary-color-milder: color-mix(in srgb, var(--primary-color), var(--primary-color-mild-reference) 25%);
+    --primary-color-mildest: color-mix(in srgb, var(--primary-color), var(--primary-color-mild-reference) 35%);
+
+    --contrast-color: var(--bs-dark); /* base color for text, etc */
+    --contrast-color-polarizer-reference: hsl(from var(--contrast-color) 0 0% calc(clamp(-0.001, calc(l / 50 - 1), 0.001) * 1000));
+    --contrast-color-intense-reference: hsl(from var(--contrast-color-polarizer-reference) 0 0% calc(l * 50 + 50));
+    --contrast-color-mild-reference: hsl(from var(--contrast-color-polarizer-reference) 0 0% calc(l * -50 + 50));
+
+    --contrast-color-light: color-mix(in srgb, var(--contrast-color), rgb(255,255,255) 15%);
+    --contrast-color-dark: color-mix(in srgb, var(--contrast-color), rgb(0,0,0) 15%);
+    --contrast-color-intense: color-mix(in srgb, var(--contrast-color), var(--contrast-color-intense-reference) 15%);
+    --contrast-color-intenser: color-mix(in srgb, var(--contrast-color), var(--contrast-color-intense-reference) 25%);
+    --contrast-color-intensest: color-mix(in srgb, var(--contrast-color), var(--contrast-color-intense-reference) 35%);
+    --contrast-color-mild: color-mix(in srgb, var(--contrast-color), var(--contrast-color-mild-reference) 15%);
+    --contrast-color-milder: color-mix(in srgb, var(--contrast-color), var(--contrast-color-mild-reference) 25%);
+    --contrast-color-mildest: color-mix(in srgb, var(--contrast-color), var(--contrast-color-mild-reference) 35%);
+}
+
+
+input::placeholder {
+    color: rgb(from var(--contrast-color-intense-reference) r g b / 60%)
+}
+/* Text. */
+.theme-color-primary-text {
+    color: var(--primary-color)
+}
+
+.theme-color-primary-light-text {
+    color: var(--primary-color-light)
+}
+
+.theme-color-primary-dark-text {
+    color: var(--primary-color-dark)
+}
+
+.theme-color-primary-intense-text {
+    color: var(--primary-color-intense)
+}
+
+.theme-color-primary-intenser-text {
+    color: var(--primary-color-intenser)
+}
+
+.theme-color-primary-intensest-text {
+    color: var(--primary-color-intensest)
+}
+
+.theme-color-primary-mild-text {
+    color: var(--primary-color-mild)
+}
+
+.theme-color-primary-milder-text {
+    color: var(--primary-color-milder)
+}
+
+.theme-color-primary-mildest-text {
+    color: var(--primary-color-mildest)
+}
+
+.theme-color-contrast-text {
+    color: var(--contrast-color)
+}
+
+.theme-color-contrast-light-text {
+    color: var(--contrast-color-light)
+}
+
+.theme-color-contrast-dark-text {
+    color: var(--contrast-color-dark)
+}
+
+.theme-color-contrast-intense-text {
+    color: var(--contrast-color-intense)
+}
+
+.theme-color-contrast-intenser-text {
+    color: var(--contrast-color-intenser)
+}
+
+.theme-color-contrast-intensest-text {
+    color: var(--contrast-color-intensest)
+}
+
+.theme-color-contrast-mild-text {
+    color: var(--contrast-color-mild)
+}
+
+.theme-color-contrast-milder-text {
+    color: var(--contrast-color-milder)
+}
+
+.theme-color-contrast-mildest-text {
+    color: var(--contrast-color-mildest)
+}
+
+/* Background. */
+.theme-color-primary-bg {
+    background-color: var(--primary-color)
+}
+
+.theme-color-primary-light-bg {
+    background-color: var(--primary-color-light)
+}
+
+.theme-color-primary-dark-bg {
+    background-color: var(--primary-color-dark)
+}
+
+.theme-color-primary-intense-bg {
+    background-color: var(--primary-color-intense)
+}
+
+.theme-color-primary-intenser-bg {
+    background-color: var(--primary-color-intenser)
+}
+
+.theme-color-primary-intensest-bg {
+    background-color: var(--primary-color-intensest)
+}
+
+.theme-color-primary-mild-bg {
+    background-color: var(--primary-color-mild)
+}
+
+.theme-color-primary-milder-bg {
+    background-color: var(--primary-color-milder)
+}
+
+.theme-color-primary-mildest-bg {
+    background-color: var(--primary-color-mildest)
+}
+
+.theme-color-contrast-bg {
+    background-color: var(--contrast-color)
+}
+
+.theme-color-contrast-light-bg {
+    background-color: var(--contrast-color-light)
+}
+
+.theme-color-contrast-dark-bg {
+    background-color: var(--contrast-color-dark)
+}
+
+.theme-color-contrast-intense-bg {
+    background-color: var(--contrast-color-intense)
+}
+
+.theme-color-contrast-intenser-bg {
+    background-color: var(--contrast-color-intenser)
+}
+
+.theme-color-contrast-intensest-bg {
+    background-color: var(--contrast-color-intensest)
+}
+
+.theme-color-contrast-mild-bg {
+    background-color: var(--contrast-color-mild)
+}
+
+.theme-color-contrast-milder-bg {
+    background-color: var(--contrast-color-milder)
+}
+
+.theme-color-contrast-mildest-bg {
+    background-color: var(--contrast-color-mildest)
+}
