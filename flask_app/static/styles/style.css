@@ -1,0 +1,85 @@
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    padding: 0 1em;
+    flex: 1;
+}
+
+img {
+    object-fit: cover;
+}
+
+input {
+    border: none;
+    outline-width: 0;
+    background-color: var(--contrast-color-transparent);
+}
+
+footer {
+    bottom: 0;
+}
+
+.icon {
+    color: inherit;
+}
+
+footer .icon {
+    margin: 0 32px;
+    height: 40px;
+}
+footer .icon>svg {
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 2.5em;
+    max-width: 720px;
+}
+
+.search-field {
+    padding: 0 0.5rem;
+    width: 100%;
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    margin-left: -36px;
+    display: flex;
+    align-items: center;
+    width: 36px;
+    height: 100%;
+}
+
+.search-button>svg {
+    height: 60%
+}
+
+.compact-card {
+margin-bottom: 0.5rem;
+/* Reduce margin between cards */
+}
+
+.compact-card .card-body {
+padding: 0.5rem;
+/* Reduce padding inside the card body */
+}
+
+.compact-card .card-title {
+font-size: 1rem;
+/* Reduce font size of the card title */
+}
+
+.compact-card .card-text {
+font-size: 0.875rem;
+/* Reduce font size of the card text */
+}

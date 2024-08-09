@@ -7,12 +7,20 @@ import re
 
 bcrypt = Bcrypt(app)
 
-# Home route with login and registration, if user logged in, redirects to dash
+# Landing Page route for first visitors, if user logged in, redirects to dash
 @app.route('/')
-def index():
+@app.route('/#<id>')
+def landing():
     if 'user_id' in session:
         return redirect('/dashboard')
     return render_template('index.html')
+
+# Route for login and registration page, if user logged in, redirects to dash
+@app.route('/login_registration')
+def index():
+    if 'user_id' in session:
+        return redirect('/dashboard')
+    return render_template('login_registration.html')
 
 # Process any registration attempts and redirects to dashboard on success
 @app.route('/users/register', methods=['POST'])

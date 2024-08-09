@@ -1,0 +1,10 @@
+nav {
+    padding: 16px;
+}
+
+nav .icon {
+    margin: 0 16px;
+}
+nav .icon>svg {
+    height: 32px;
+}
