@@ -20,23 +20,12 @@ input {
     background-color: var(--contrast-color-transparent);
 }
 
-nav {
-    padding: 16px;
-}
-
 footer {
     bottom: 0;
 }
 
 .icon {
     color: inherit;
-}
-
-nav .icon {
-    margin: 0 16px;
-}
-nav .icon>svg {
-    height: 32px;
 }
 
 footer .icon {
@@ -59,7 +48,7 @@ footer .icon>svg {
     padding: 0 0.5rem;
     width: 100%;
 }
-  
+
 .search-button {
     background: transparent;
     border: none;
@@ -73,4 +62,24 @@ footer .icon>svg {
 
 .search-button>svg {
     height: 60%
+}
+
+.compact-card {
+margin-bottom: 0.5rem;
+/* Reduce margin between cards */
+}
+
+.compact-card .card-body {
+padding: 0.5rem;
+/* Reduce padding inside the card body */
+}
+
+.compact-card .card-title {
+font-size: 1rem;
+/* Reduce font size of the card title */
+}
+
+.compact-card .card-text {
+font-size: 0.875rem;
+/* Reduce font size of the card text */
 }
