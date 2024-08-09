@@ -15,20 +15,23 @@ function updateTheme() {
 
     let darkModeEnabled = localStorage.getItem('darkMode') === 'true';
 
-    themeSwitch.checked = darkModeEnabled;
-    themeSwitchLabel.textContent = darkModeEnabled ? 'Dark Mode' : 'Light Mode';
+    if (themeSwitch && themeSwitchLabel) {
+        themeSwitch.checked = darkModeEnabled;
+        themeSwitchLabel.textContent = darkModeEnabled ? 'Dark Mode' : 'Light Mode';
+    }
 
     document.querySelector(':root').style.setProperty('--primary-color', darkModeEnabled ? themePrimaryDark : themePrimaryLight);
     document.querySelector(':root').style.setProperty('--contrast-color', darkModeEnabled ? themeContrastDark : themeContrastLight);
 };
 
-document.getElementById('themeSwitch').addEventListener('change', function() {
-    let enabled = this.checked;
+if (themeSwitch) {
+    themeSwitch.addEventListener('change', function() {
+        let darkModeEnabled = themeSwitch.checked;
+        localStorage.setItem('darkMode', darkModeEnabled);
 
-    console.log('Dark mode enabled:', enabled);
-    localStorage.setItem('darkMode', enabled);
-    updateTheme();
-});
+        updateTheme();
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     updateTheme();
