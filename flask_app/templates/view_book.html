@@ -29,7 +29,6 @@
   <div class="container mt-4">
     <div class="mb-3 w-100">
       <div class="card compact-card theme-color-primary-mild-bg theme-color-contrast-text px-2">
-        <form action="/book/{{ book.id }}/update" method="post" class="container mt-5">
           {% for message in get_flashed_messages() %}
           <p class="text-danger">{{ message }}</p>
           {% endfor %}
@@ -53,12 +52,15 @@
             <p class="fs-5">Quantity In Stock</p>
             <p class="form-control w-50 fs-5">{{ book.quantity_in_stock }}</p>
           </div>
-          <input type="hidden" name="user_id" value="{{session['user_id']}}" />
+          
           <div class="d-flex gap-3 mb-5">
             <a href="/dashboard" class="btn btn-lg btn-warning">Cancel</a>
-            <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+
+            <form action = "/order/add_book/{{book.id}}" method='post'>
+              <button class="btn btn-lg btn-primary" type="submit">Add to Cart</button>
+            </form>
           </div>
-        </form>
+
       </div>
     </div>
   </div>
