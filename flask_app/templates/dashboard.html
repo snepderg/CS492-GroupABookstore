@@ -44,6 +44,9 @@
         </div>
         {% endfor %}
       </div>
+      {% if books|length == 0 %}
+      <p class="text-info"><strong>No books found.</strong></p>
+      {% endif %}
     </div>
   </div>
 </body>
