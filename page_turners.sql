@@ -27,10 +27,11 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`users` (
   `email` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
   `admin` TINYINT NULL DEFAULT NULL,
-  `created_at` DATETIME NULL DEFAULT NOW(),
-  `updated_at` DATETIME NULL DEFAULT NOW() ON UPDATE NOW(),
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -47,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`books` (
   `price` DECIMAL(6,2) NULL DEFAULT NULL,
   `quantity_in_stock` INT NULL DEFAULT NULL,
   `user_id` INT NOT NULL,
-  `created_at` DATETIME NULL DEFAULT NOW(),
-  `updated_at` DATETIME NULL DEFAULT  NOW() ON UPDATE NOW(),
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_books_users_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_books_users`
@@ -57,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`books` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -68,21 +70,39 @@ DROP TABLE IF EXISTS `page_turners`.`orders` ;
 CREATE TABLE IF NOT EXISTS `page_turners`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `total` DECIMAL(6,2) NULL DEFAULT NULL,
-  `book_id` INT NOT NULL,
   `customer_id` INT NOT NULL,
-  `created_at` DATETIME NULL DEFAULT NOW(),
-  `updated_at` DATETIME NULL DEFAULT NOW() ON UPDATE NOW(),
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_orders_books1_idx` (`book_id` ASC) VISIBLE,
   INDEX `fk_orders_users1_idx` (`customer_id` ASC) VISIBLE,
-  CONSTRAINT `fk_orders_books1`
+  CONSTRAINT `fk_orders_users1`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `page_turners`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `page_turners`.`books_in_orders`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `page_turners`.`books_in_orders` ;
+
+CREATE TABLE IF NOT EXISTS `page_turners`.`books_in_orders` (
+  `order_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  INDEX `fk_books_in_orders_orders1_idx` (`order_id` ASC) VISIBLE,
+  INDEX `fk_books_in_orders_books1_idx` (`book_id` ASC) VISIBLE,
+  CONSTRAINT `fk_books_in_orders_books1`
     FOREIGN KEY (`book_id`)
     REFERENCES `page_turners`.`books` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_orders_users1`
-    FOREIGN KEY (`customer_id`)
-    REFERENCES `page_turners`.`users` (`id`)
+  CONSTRAINT `fk_books_in_orders_orders1`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `page_turners`.`orders` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
