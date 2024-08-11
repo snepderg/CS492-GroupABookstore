@@ -1,4 +1,7 @@
+from flask import flash, session
+
 from flask_app.config.mysqlconnection import connectToMySQL
+
 
 class Book:
   db = 'page_turners'
@@ -49,3 +52,49 @@ class Book:
     if len(result) < 1:
       return False
     return cls(result[0])
+  
+  @staticmethod
+  def validate(data):
+    is_valid = True
+
+    # Unique Title validation
+    all_books = Book.get_all()
+    if len(data['title']) < 1:
+      is_valid = False
+      flash('Title is required.')
+    elif len(data['title']) < 2:
+      is_valid = False
+      flash('Title must be at least 2 characters.')
+    else:
+      for one_book in all_books:
+        if one_book.title.lower() == data['title'].lower():
+          is_valid = False
+          flash('Title already exists.')
+  
+    # Genre validation with keeping invalid admin input
+    if len(data['genre']) < 1:
+        is_valid = False
+        session['genre'] = data['genre']
+        flash('Genre is required.')
+    elif len(data['genre']) < 3:
+        is_valid = False
+        session['genre'] = data['genre']
+        flash('Genre must be at least 3 characters.')
+
+    # Price validation
+    if len(data['price']) < 1:
+        is_valid = False
+        flash('Price is required.')
+    elif float(data['price']) < 1:
+        is_valid = False
+        flash('Price must be greater than 0.')
+
+    # Quantity validation
+    if len(data['quantity_in_stock']) < 1:
+        is_valid = False
+        flash('Quantity in stock is required.')
+    elif int(data['quantity_in_stock']) < 1:
+        is_valid = False
+        flash('Quantity must be greater than 0.')
+
+    return is_valid

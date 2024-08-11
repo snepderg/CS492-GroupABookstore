@@ -1,8 +1,10 @@
-from flask_app import app
-from flask import render_template, session, redirect, request, flash, url_for
+from flask import flash, redirect, render_template, request, session, url_for
 from flask_bcrypt import Bcrypt
+
+from flask_app import app
 from flask_app.models.book_model import Book
 from flask_app.models.user_model import User
+
 
 # Maybe move this to its own module for reusability
 def is_admin():
@@ -22,6 +24,8 @@ def new_book():
 
 @app.route('/book/new/process', methods=['POST'])
 def process_book_data():
+  if not Book.validate(request.form):
+    return redirect("/book/new")
   if not is_admin():
     return redirect('/')
 
@@ -50,6 +54,8 @@ def edit_book(id):
 
 @app.route('/book/<int:id>/update', methods=['POST'])
 def update_book(id):
+  if not Book.validate(request.form):
+    return redirect(f"/book/{id}/edit")
   if not is_admin():
     return redirect('/')
 

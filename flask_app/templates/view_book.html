@@ -55,10 +55,11 @@
           
           <div class="d-flex gap-3 mb-5">
             <a href="/dashboard" class="btn btn-lg btn-warning">Cancel</a>
-
+            {%if session['admin'] == 0%}
             <form action = "/order/add_book/{{book.id}}" method='post'>
               <button class="btn btn-lg btn-primary" type="submit">Add to Cart</button>
             </form>
+            {%endif%}
           </div>
 
       </div>
