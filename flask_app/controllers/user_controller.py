@@ -1,9 +1,11 @@
-from flask_app import app
-from flask import render_template, session, redirect, request, flash, url_for
-from flask_bcrypt import Bcrypt
-from flask_app.models.user_model import User
-from flask_app.models.book_model import Book
 import re
+
+from flask import flash, redirect, render_template, request, session, url_for
+from flask_bcrypt import Bcrypt
+
+from flask_app import app
+from flask_app.models.book_model import Book
+from flask_app.models.user_model import User
 
 bcrypt = Bcrypt(app)
 
@@ -26,7 +28,7 @@ def index():
 @app.route('/users/register', methods=['POST'])
 def process_registration():
     if not User.validate(request.form):
-      return redirect('/')
+      return redirect('/login_registration')
     pass_hash = bcrypt.generate_password_hash(request.form['password'])
     if re.search(r'@dundermifflin\.com$', request.form['email']):
       admin = 1
@@ -71,6 +73,8 @@ def logout():
 def dashboard():
   if 'user_id' not in session:
     return redirect('/')
+  if session.get('admin') == 1:
+    return redirect('/admin_dashboard')
   one_user = User.get_by_id({'id':session['user_id']})
   books = Book.get_all()
   return render_template('dashboard.html', one_user = one_user, books = books)
