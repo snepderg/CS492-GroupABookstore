@@ -3,13 +3,6 @@ from flask_bcrypt import Bcrypt
 
 from flask_app import app
 from flask_app.models.book_model import Book
-from flask_app.models.user_model import User
-
-
-# Maybe move this to its own module for reusability
-def is_admin():
-  user = User.get_by_id({'id': session['user_id']})
-  return user.admin == 1
 
 # Routes
 @app.route('/book/new')
@@ -17,7 +10,7 @@ def new_book():
   if 'user_id' not in session:
     return redirect('/')
 
-  if not is_admin():
+  if session.get('admin') != 1:
     return redirect('/')
 
   return render_template ('new_book.html')
@@ -26,8 +19,6 @@ def new_book():
 def process_book_data():
   if not Book.validate(request.form):
     return redirect("/book/new")
-  if not is_admin():
-    return redirect('/')
 
   Book.create(request.form)
   return redirect('/admin_dashboard')
@@ -42,7 +33,7 @@ def edit_book(id):
   if 'user_id' not in session:
     return redirect('/')
 
-  if not is_admin():
+  if session.get('admin') != 1:
     return redirect('/')
 
   book = Book.get_by_id({'id': id})
@@ -56,9 +47,8 @@ def edit_book(id):
 def update_book(id):
   if not Book.validate(request.form):
     return redirect(f"/book/{id}/edit")
-  if not is_admin():
-    return redirect('/')
 
   book_data = {**request.form, 'id': id}
+
   Book.update(book_data)
   return redirect('/admin_dashboard')
