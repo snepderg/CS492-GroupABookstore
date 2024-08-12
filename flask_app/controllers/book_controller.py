@@ -43,7 +43,7 @@ def edit_book(id):
 
   return render_template('edit_book.html', book = book)
 
-@app.route('/book/<int:id>/update', methods=['POST'])
+@app.route('/book/<int:id>/edit/process', methods=['POST'])
 def update_book(id):
   if not Book.validate(request.form):
     return redirect(f"/book/{id}/edit")
