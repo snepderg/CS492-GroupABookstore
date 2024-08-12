@@ -4,7 +4,6 @@ from flask_bcrypt import Bcrypt
 from flask_app import app
 from flask_app.models.book_model import Book
 
-# Routes
 @app.route('/book/new')
 def new_book():
   if 'user_id' not in session:
