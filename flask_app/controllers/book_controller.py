@@ -54,7 +54,11 @@ def edit_book(id):
 
 @app.route('/book/<int:id>/update', methods=['POST'])
 def update_book(id):
-  if not Book.validate(request.form):
+  data = {
+        **request.form,
+        'id': id
+    }
+  if not Book.validate_edit(data):
     return redirect(f"/book/{id}/edit")
   if not is_admin():
     return redirect('/')
@@ -63,8 +67,9 @@ def update_book(id):
   Book.update(book_data)
   return redirect('/admin_dashboard')
 
-@app.route('/book/<int:id>/delete/process', methods=['POST'])
+@app.route('/book/<int:id>/delete')
 def delete_book(id):
-  flash('Deleted Book: ', Book.get_by_id({'id': id}).title)
-  Book.delete(id)
-  return redirect('/admin_dashboard')
+  if is_admin():
+    flash('Deleted Book: ', Book.get_by_id({'id': id}).title)
+    Book.delete({'id': id})
+    return redirect('/admin_dashboard')

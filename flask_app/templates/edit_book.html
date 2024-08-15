@@ -60,9 +60,7 @@
             </div>
             <div>
               {% if session['admin'] == 1 %}
-              <form action="/book/{{ book.id }}/delete/process" method='post'>
-                <button id="deleteBookButton" class="btn btn-lg btn-danger">Delete Book</button>
-              </form>
+              <a href="/book/{{ book.id }}/delete" id ="deleteBookButton" class="btn btn-lg btn-danger">Delete Book</a>
               {% endif %}
             </div>
           </div>

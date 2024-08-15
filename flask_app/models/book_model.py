@@ -105,3 +105,50 @@ class Book:
         flash('Quantity must be greater than 0.')
 
     return is_valid
+  
+  @staticmethod
+  def validate_edit(data):
+    is_valid = True
+
+    # Unique Title validation
+    all_creations = Book.get_all()
+    this_creation = Book.get_by_id(data)
+    if len(data['title']) < 1:
+      is_valid = False
+      flash('Title is required.')
+    elif len(data['title']) < 2:
+      is_valid = False
+      flash('Title must be at least 2 characters.')
+    else:
+      for one_creation in all_creations:
+        if one_creation.title.lower() == data['title'].lower() and this_creation.title.lower() != one_creation.title.lower():
+          is_valid = False
+          flash('Title already exists.')
+    
+    # Description validation with keeping invalid user input
+    if len(data['genre']) < 1:
+        is_valid = False
+        session['genre'] = data['genre']
+        flash('Genre is required.')
+    elif len(data['genre']) < 3:
+        is_valid = False
+        session['genre'] = data['genre']
+        flash('Genre must be at least 3 characters.')
+
+    # Price validation
+    if len(data['price']) < 1:
+        is_valid = False
+        flash('Price is required.')
+    elif float(data['price']) < 1:
+        is_valid = False
+        flash('Price must be greater than 0.')
+
+    # Quantity validation
+    if len(data['quantity_in_stock']) < 1:
+        is_valid = False
+        flash('Quantity is required.')
+    elif int(data['quantity_in_stock']) < 1:
+        is_valid = False
+        flash('Quantity must be greater than 0.')
+
+    return is_valid
