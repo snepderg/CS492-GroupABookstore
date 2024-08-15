@@ -64,22 +64,44 @@ footer .icon>svg {
     height: 60%
 }
 
-.compact-card {
-margin-bottom: 0.5rem;
-/* Reduce margin between cards */
+.scrollable {
+    padding-right: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 425px;
 }
 
-.compact-card .card-body {
-padding: 0.5rem;
-/* Reduce padding inside the card body */
+::-webkit-scrollbar {
+    width: 15px;
 }
 
-.compact-card .card-title {
-font-size: 1rem;
-/* Reduce font size of the card title */
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
 }
 
-.compact-card .card-text {
-font-size: 0.875rem;
-/* Reduce font size of the card text */
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--contrast-color-mild);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--contrast-color);
+}
+
+#themeSwitchLabel {
+    user-select: none;
+}
+
+div:has(>#themeSwitch) {
+    border: 2.5px solid rgb(from var(--contrast-color-mild) r g b / 0.2);
+    border-radius: 4px;
+}
+
+#themeSwitch {
+    margin: auto;
+    margin-left: -30px;
 }
