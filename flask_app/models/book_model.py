@@ -33,6 +33,13 @@ class Book:
     return connectToMySQL(cls.db).query_db(query, data)
 
   @classmethod
+  def delete(cls, data):
+    query = """
+        DELETE FROM books WHERE id = %(id)s;
+    """
+    return connectToMySQL(cls.db).query_db(query, data)
+
+  @classmethod
   def get_all(cls):
     query = """
         SELECT * FROM books;
@@ -52,7 +59,7 @@ class Book:
     if len(result) < 1:
       return False
     return cls(result[0])
-  
+
   @staticmethod
   def validate(data):
     is_valid = True
@@ -70,7 +77,7 @@ class Book:
         if one_book.title.lower() == data['title'].lower():
           is_valid = False
           flash('Title already exists.')
-  
+
     # Genre validation with keeping invalid admin input
     if len(data['genre']) < 1:
         is_valid = False

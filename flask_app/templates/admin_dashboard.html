@@ -49,6 +49,9 @@
       {% if books|length == 0 %}
       <p class="text-info"><strong>No books found. Why not create some?</strong></p>
       {% endif %}
+      {% for message in get_flashed_messages(category_filter = ['reg']) %}
+      <p class="text-danger ms-3">{{ message }}</p>
+      {% endfor %}
     </div>
   </div>
 </body>

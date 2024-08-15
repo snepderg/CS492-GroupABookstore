@@ -52,14 +52,14 @@
             <p class="fs-5">Quantity In Stock</p>
             <p class="form-control w-50 fs-5">{{ book.quantity_in_stock }}</p>
           </div>
-          
+
           <div class="d-flex gap-3 mb-5">
             <a href="/dashboard" class="btn btn-lg btn-warning">Cancel</a>
-            {%if session['admin'] == 0%}
-            <form action = "/order/add_book/{{book.id}}" method='post'>
+            {% if session['admin'] == 0 %}
+            <form action="/order/add_book/{{book.id}}" method='post'>
               <button class="btn btn-lg btn-primary" type="submit">Add to Cart</button>
             </form>
-            {%endif%}
+            {% endif %}
           </div>
 
       </div>

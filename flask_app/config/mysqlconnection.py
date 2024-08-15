@@ -26,6 +26,9 @@ class MySQLConnection:
                     self.connection.commit()
                     result = cursor.fetchall()
                     return result
+                elif query.lower().find("delete") >= 0:
+                    self.connection.commit()
+                    return True
                 else:
                     self.connection.commit()
             except Exception as e:

@@ -62,3 +62,9 @@ def update_book(id):
   book_data = {**request.form, 'id': id}
   Book.update(book_data)
   return redirect('/admin_dashboard')
+
+@app.route('/book/<int:id>/delete/process', methods=['POST'])
+def delete_book(id):
+  flash('Deleted Book: ', Book.get_by_id({'id': id}).title)
+  Book.delete(id)
+  return redirect('/admin_dashboard')
