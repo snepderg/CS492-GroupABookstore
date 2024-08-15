@@ -30,7 +30,7 @@
   <div class="container mt-4">
     <div class="mb-3 w-100">
       <div class="card compact-card theme-color-primary-mild-bg theme-color-contrast-text px-2">
-        <form action="/book/{{ book.id }}/update" method="post" class="container mt-5">
+        <form action="/book/{{ book.id }}/edit/process" method="post" class="container mt-5">
           <div class="d-flex justify-content-between mb-3">
             <label for="title" class="form-label fs-5">Title</label>
             <input value="{{ book.title }}" name="title" id="title" type="text" class="form-control w-50 fs-5">
