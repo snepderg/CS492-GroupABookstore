@@ -70,6 +70,6 @@ def update_book(id):
 @app.route('/book/<int:id>/delete')
 def delete_book(id):
   if is_admin():
-    flash('Deleted Book: ', Book.get_by_id({'id': id}).title)
+    flash(f'Deleted Book: {Book.get_by_id({"id": id}).title}', 'reg')
     Book.delete({'id': id})
     return redirect('/admin_dashboard')
