@@ -21,7 +21,7 @@ def create_order(book_id):
     Order.add_book_to_order(order_data)
     Book.update_book_quantity({'id':book_id,'quantity_in_stock':book.quantity_in_stock -1})
     return redirect(f'/book/{book.id}/view')
-  else: 
+  else:
     order = Order.get_by_id({'id':session['order_id']})
     update_order_total = {
       'id' : session['order_id'],
@@ -31,6 +31,7 @@ def create_order(book_id):
     Order.add_book_to_order({'order_id':order.id, 'book_id':book_id})
     Order.update_order(update_order_total)
     Book.update_book_quantity({'id':book_id,'quantity_in_stock':book.quantity_in_stock -1})
+    flash(f'Added {book.title} to cart.', 'info')
     return redirect(f'/book/{book.id}/view')
 
 @app.route('/order/<int:user_id>/view')
