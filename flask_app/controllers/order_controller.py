@@ -50,5 +50,7 @@ def delete_book_from_order(book_id):
   if order.total < 0:
     Order.delete_order({'id':session['order_id']})
     flash('Cart is empty') #or we can add this to the frontend with an if conditional
+  else:
+    flash(f'{book.title} removed from cart.')
   return redirect(f'/order/{session["user_id"]}/view')
 
