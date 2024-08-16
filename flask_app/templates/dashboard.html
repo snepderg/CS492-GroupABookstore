@@ -22,7 +22,9 @@
         <input class="form-check-input px-2" type="checkbox" id="themeSwitch" role="switch">
         <label class="form-check-label px-2 fs-5" id="themeSwitchLabel" for="themeSwitch">Dark Mode</label>
       </div>
-      <a href="#" class="icon" alt="Cart"><external-svg src="/static/svg/functional/shopping-cart.svg"></a>
+      {% if session['order_id'] %}
+      <a href="/order/{{ one_user.id }}/view" class="icon" alt="Cart"><external-svg src="/static/svg/functional/shopping-cart.svg"></a>
+      {% endif %}
       <a href="/users/logout" class="icon" alt="Log Out"><external-svg src="/static/svg/functional/logout.svg"></a>
     </nav>
   </div>

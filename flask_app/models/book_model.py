@@ -31,6 +31,13 @@ class Book:
         WHERE id = %(id)s;
     """
     return connectToMySQL(cls.db).query_db(query, data)
+  
+  @classmethod
+  def update_book_quantity(cls, data):
+    query = """
+      UPDATE books SET quantity_in_stock = %(quantity_in_stock)s WHERE id = %(id)s;
+    """
+    return connectToMySQL(cls.db).query_db(query, data)
 
   @classmethod
   def delete(cls, data):

@@ -5,6 +5,7 @@ from flask_bcrypt import Bcrypt
 
 from flask_app import app
 from flask_app.models.book_model import Book
+from flask_app.models.order_model import Order
 from flask_app.models.user_model import User
 
 bcrypt = Bcrypt(app)
@@ -67,6 +68,7 @@ def process_login():
 @app.route('/users/logout')
 def logout():
     del session['user_id']
+    session.clear()
     return redirect('/')
 
 @app.route('/dashboard')
