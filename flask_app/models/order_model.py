@@ -38,6 +38,14 @@ class Order:
     return cls(result[0])
   
   @classmethod
+  def get_order_by_customer(cls, data):
+    query = """
+      SELECT * FROM orders WHERE customer_id = %(customer_id)s;
+    """
+    result = connectToMySQL(cls.db).query_db(query, data)
+    return cls(result[0])
+  
+  @classmethod
   def get_one_with_books(cls, data):
     query = """
         SELECT * FROM orders JOIN 
@@ -49,12 +57,37 @@ class Order:
     order = cls(results[0])
     for row in results: 
       book_data = {
-        'id' : row['id'],
+        'id' : row['books.id'],
         'title' : row['title'],
         'genre' : row['genre'],
         'price' : row['price'],
-        'author' : row['author']
+        'author' : row['author'],
+        'quantity_in_stock' : row['quantity_in_stock'],
+        'user_id' : row['user_id'],
+        'created_at' : row['books.created_at'],
+        'updated_at' : row['books.updated_at']
       }
       book = book_model.Book(book_data)
       order.books.append(book)
     return order
+  
+  @classmethod
+  def update_order(cls, data):
+    query = """
+      UPDATE orders SET total = %(total)s WHERE id = %(id)s;
+      """
+    return connectToMySQL(cls.db).query_db(query, data)
+  
+  @classmethod
+  def delete_book(cls, data):
+    query = """
+      DELETE FROM books_in_orders WHERE book_id = %(book_id)s AND order_id = %(order_id)s;
+    """
+    return connectToMySQL(cls.db).query_db(query, data)
+  
+  @classmethod
+  def delete_order(cls, data):
+    query = """
+      DELETE FROM orders WHERE id = %(id)s;
+    """
+    return connectToMySQL(cls.db).query_db(query, data)

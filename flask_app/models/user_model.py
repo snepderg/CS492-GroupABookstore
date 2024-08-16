@@ -1,6 +1,8 @@
-from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
 import re
+
+from flask import flash
+
+from flask_app.config.mysqlconnection import connectToMySQL
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -88,3 +90,4 @@ class User:
     if results:
       return cls(results[0])
     return False
+
