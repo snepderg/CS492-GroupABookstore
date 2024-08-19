@@ -10,12 +10,13 @@ class Order:
     # self.book_id = data['book_id']
     self.customer_id = data['customer_id']
     self.books = []
+    self.each_book = []
 
   @classmethod
   def create_order(cls, data):
     query = """
-      INSERT INTO orders (total, customer_id)
-      VALUES (%(total)s, %(customer_id)s)
+      INSERT INTO orders (total, customer_id, order_number)
+      VALUES (%(total)s, %(customer_id)s, %(order_number)s)
     """
     return connectToMySQL(cls.db).query_db(query, data)
   
@@ -54,6 +55,8 @@ class Order:
         WHERE orders.id = %(id)s
     """
     results = connectToMySQL(cls.db).query_db(query, data)
+    if len(results) < 1:
+      return False
     order = cls(results[0])
     for row in results: 
       book_data = {
@@ -65,9 +68,11 @@ class Order:
         'quantity_in_stock' : row['quantity_in_stock'],
         'user_id' : row['user_id'],
         'created_at' : row['books.created_at'],
-        'updated_at' : row['books.updated_at']
+        'updated_at' : row['books.updated_at'],
+        'book_in_order_id' : row['books_in_orders.id']
       }
       book = book_model.Book(book_data)
+      print(book_data)
       order.books.append(book)
     return order
   
