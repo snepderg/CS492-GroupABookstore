@@ -14,10 +14,6 @@ img {
     object-fit: cover;
 }
 
-.image-rounded {
-    border-radius: 10px;
-}
-
 input {
     border: none;
     outline-width: 0;
