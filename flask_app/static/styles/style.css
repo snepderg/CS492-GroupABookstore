@@ -101,4 +101,13 @@ div:has(>#themeSwitch) {
 #themeSwitch {
     margin: auto;
     margin-left: -30px;
+.custom-dropdown-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+.custom-dropdown-button .bi {
+    margin-left: auto;
 }
