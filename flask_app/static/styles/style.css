@@ -67,8 +67,8 @@ footer .icon>svg {
 .scrollable {
     padding-right: 10px;
     overflow-x: hidden;
-    overflow-y: scroll;
-    max-height: 425px;
+    overflow-y: auto;
+    max-height: 450px;
 }
 
 ::-webkit-scrollbar {
