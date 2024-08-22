@@ -16,7 +16,18 @@ bcrypt = Bcrypt(app)
 def landing():
     if 'user_id' in session:
         return redirect('/dashboard')
-    return render_template('index.html')
+
+    authors_books = {
+      author: [book for book in Book.get_by_author({'author': author})]
+      for author in ['Terry Pratchett', 'J. D. Salinger', 'Stephen King']
+    }
+
+    genres_books = {
+      genre: [book for book in Book.get_by_genre({'genre': genre})]
+      for genre in ['Fantasy', 'Historical Fiction', 'Horror']
+    }
+
+    return render_template('index.html', authors_books = authors_books, genres_books = genres_books)
 
 # Route for login and registration page, if user logged in, redirects to dash
 @app.route('/login_registration')
