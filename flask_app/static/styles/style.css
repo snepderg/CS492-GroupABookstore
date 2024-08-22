@@ -101,6 +101,27 @@ div:has(>#themeSwitch) {
 #themeSwitch {
     margin: auto;
     margin-left: -30px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+}
+
+#carouselContainer {
+    display: flex;
+    min-height: 340px;
+}
+
+.carousel-container {
+    min-width: 45%;
+}
+
 .custom-dropdown-button {
     display: flex;
     justify-content: space-between;
