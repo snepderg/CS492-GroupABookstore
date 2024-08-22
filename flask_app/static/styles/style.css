@@ -122,6 +122,10 @@ div:has(>#themeSwitch) {
     min-width: 45%;
 }
 
+.carousel-item {
+    transition: transform 2s ease-in-out;
+}
+
 .custom-dropdown-button {
     display: flex;
     justify-content: space-between;
