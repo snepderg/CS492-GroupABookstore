@@ -1,3 +1,5 @@
+// The purpose of this file is to add genre options and handle a dropdown menu for selecting a genre.
+
 document.addEventListener('DOMContentLoaded', function () {
     const genreDropdown = document.getElementById('genreDropdownMenuButton');
     const genreList = document.getElementById('genreList');
