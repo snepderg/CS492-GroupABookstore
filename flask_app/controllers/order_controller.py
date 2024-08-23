@@ -1,7 +1,10 @@
+import uuid
+
 from flask import flash, redirect, render_template, request, session, url_for
 
 from flask_app import app
 from flask_app.models.book_model import Book
+from flask_app.models.books_in_order import Books_in_Order
 from flask_app.models.order_model import Order
 from flask_app.models.user_model import User
 
@@ -12,7 +15,8 @@ def create_order(book_id):
   if 'order_id' not in session:
     data = {
       'customer_id' : session['user_id'],
-      'total' : 0 + book.price
+      'total' : 0 + book.price,
+      'order_number': str(uuid.uuid4())[:9]
     }
     print('new order data', data)
     new_order = Order.create_order(data)
@@ -41,16 +45,26 @@ def view_order(user_id):
   one_user = User.get_by_id({'id':session['user_id']})
   return render_template('view_order.html', order = order, one_user = one_user)
 
-@app.route('/order/<int:book_id>/delete_book')
-def delete_book_from_order(book_id):
+@app.route('/order/<int:book_order_id>/delete_book')
+def delete_book_from_order(book_order_id):
   order = Order.get_by_id({'id':session['order_id']})
-  book = Book.get_by_id({'id': book_id})
+  book_in_order = Books_in_Order.find_one_entry({'id':book_order_id})
+  book = Book.get_by_id({'id': book_in_order.book_id})
   Order.update_order({'id':session['order_id'],'total':(order.total - book.price)})
-  Order.delete_book({'book_id':book_id,'order_id':order.id})
-  if order.total < 0:
+  Book.update_book_quantity({'id':book.id,'quantity_in_stock':book.quantity_in_stock + 1})
+  Books_in_Order.delete_one_book({'id':book_order_id})
+  print("what is the total", order.total)
+
+  if len(order.books) == 0:
     Order.delete_order({'id':session['order_id']})
+    print('***ORDER DELETED****')
+    del session['order_id']
     flash('Cart is empty') #or we can add this to the frontend with an if conditional
+    return redirect('/dashboard')
   else:
     flash(f'{book.title} removed from cart.')
   return redirect(f'/order/{session["user_id"]}/view')
+
+# delete book()
+
 

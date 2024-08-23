@@ -5,16 +5,18 @@ from flask_app.config.mysqlconnection import connectToMySQL
 
 class Book:
   db = 'page_turners'
-  def __init__(self, data):
-    self.id = data['id']
-    self.title = data['title']
-    self.genre = data['genre']
-    self.author = data['author']
-    self.price = data['price']
-    self.quantity_in_stock = data['quantity_in_stock']
-    self.user_id = data['user_id']
-    self.created_at = data['created_at']
-    self.updated_at = data['updated_at']
+  def __init__(self, book_data_dict):
+    self.id = book_data_dict['id']
+    self.title = book_data_dict['title']
+    self.genre = book_data_dict['genre']
+    self.price = book_data_dict['price']
+    self.author = book_data_dict['author']
+    self.quantity_in_stock = book_data_dict['quantity_in_stock']
+    self.user_id = book_data_dict['user_id']
+    self.created_at = book_data_dict['created_at']
+    self.updated_at = book_data_dict['updated_at']
+    self.book_in_order_id = book_data_dict.get('book_in_order_id')
+
 
   @classmethod
   def create(cls, data):

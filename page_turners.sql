@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`users` (
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`books` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`orders` (
   `customer_id` INT NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `order_number` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_orders_users1_idx` (`customer_id` ASC) VISIBLE,
   CONSTRAINT `fk_orders_users1`
@@ -81,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`orders` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -93,8 +94,10 @@ DROP TABLE IF EXISTS `page_turners`.`books_in_orders` ;
 CREATE TABLE IF NOT EXISTS `page_turners`.`books_in_orders` (
   `order_id` INT NOT NULL,
   `book_id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   INDEX `fk_books_in_orders_orders1_idx` (`order_id` ASC) VISIBLE,
   INDEX `fk_books_in_orders_books1_idx` (`book_id` ASC) VISIBLE,
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_books_in_orders_books1`
     FOREIGN KEY (`book_id`)
     REFERENCES `page_turners`.`books` (`id`)
@@ -107,6 +110,31 @@ CREATE TABLE IF NOT EXISTS `page_turners`.`books_in_orders` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `page_turners`.`inquiries`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `page_turners`.`inquiries` ;
+
+CREATE TABLE IF NOT EXISTS `page_turners`.`inquiries` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(255) NULL,
+  `last_name` VARCHAR(255) NULL,
+  `category` VARCHAR(255) NULL,
+  `description` VARCHAR(1000) NULL,
+  `order_number` VARCHAR(255) NULL,
+  `created_at` DATETIME NULL DEFAULT NOW(),
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_inquiries_users1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_inquiries_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `page_turners`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
