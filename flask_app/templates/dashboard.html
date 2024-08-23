@@ -24,6 +24,7 @@
         <input class="form-check-input px-2" type="checkbox" id="themeSwitch" role="switch">
         <label class="form-check-label px-2 fs-5" id="themeSwitchLabel" for="themeSwitch">Dark Mode</label>
       </div>
+      <a href="/contact_us" class="icon" alt="Contact Us"><external-svg src="/static/svg/functional/envelope.svg"></a>
       {% if session['order_id'] %}
       <a href="/order/{{ one_user.id }}/view" class="icon" alt="Cart"><external-svg
           src="/static/svg/functional/shopping-cart.svg"></a>
@@ -32,6 +33,12 @@
     </nav>
   </div>
   <div class="container mt-4">
+    {% for message in get_flashed_messages(category_filter = ['info']) %}
+    <p class="text-info">{{ message }}</p>
+    {% endfor %}
+    {% for message in get_flashed_messages(category_filter = ['reg']) %}
+    <p class="text-danger ms-3">{{ message }}</p>
+    {% endfor %}
     <h2>Books:</h2>
     <div class="w-75 search-bar rounded my-2 theme-color-primary-milder-bg">
       <input type="text" name="search" id="bookSearch" placeholder="Search Books..."

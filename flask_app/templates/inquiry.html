@@ -16,7 +16,7 @@
 
 <body class="theme-color-primary-bg theme-color-contrast-text">
   <div class="container d-flex justify-content-between mt-3 align-items-center">
-    <h1>{{ concern.reporter.first_name }}'s Inquiry</h1>
+    <h1>{{ concern.first_name }}'s Inquiry</h1>
     <nav class="d-flex flex-row justify-content-end">
       <div class="form-check form-switch d-flex flex-row align-items-center">
         <input class="form-check-input px-2" type="checkbox" id="themeSwitch" role="switch">
@@ -30,7 +30,7 @@
     {% for message in get_flashed_messages(category_filter = ['reg']) %}
     <p class="text-danger">{{ message }}</p>
     {% endfor %}
-    {% for message in get_flashed_messages(category_filter = ['info']) %}
+    {% for message in get_flashed_messages(category_filter = ['reg']) %}
     <p class="text-info ms-3">{{ message }}</p>
     {% endfor %}
     <div class="card p-3 compact-card theme-color-primary-mild-bg theme-color-contrast-text">
