@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, request, session, url_for
 
 from flask_app import app
-from flask_app.models.inquiries_model import Inquiry
+from flask_app.models.inquiry_model import Inquiry
 from flask_app.models.user_model import User
 
 
