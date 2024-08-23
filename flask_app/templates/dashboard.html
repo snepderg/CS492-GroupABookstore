@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Dashboard</title>
+  <link rel="icon" href="/static/img/favicon.ico" sizes="any">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="/static/styles/theme.css">
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="/static/styles/nav.css">
   <script defer src="/static/scripts/external-svg-element.js"></script>
   <script defer src="/static/scripts/dark-mode.js"></script>
+  <script defer src="/static/scripts/dashboard-book-search.js"></script>
 </head>
 
 <body class="theme-color-primary-bg theme-color-contrast-text">
@@ -23,14 +25,24 @@
         <label class="form-check-label px-2 fs-5" id="themeSwitchLabel" for="themeSwitch">Dark Mode</label>
       </div>
       {% if session['order_id'] %}
-      <a href="/order/{{ one_user.id }}/view" class="icon" alt="Cart"><external-svg src="/static/svg/functional/shopping-cart.svg"></a>
+      <a href="/order/{{ one_user.id }}/view" class="icon" alt="Cart"><external-svg
+          src="/static/svg/functional/shopping-cart.svg"></a>
       {% endif %}
       <a href="/users/logout" class="icon" alt="Log Out"><external-svg src="/static/svg/functional/logout.svg"></a>
     </nav>
   </div>
   <div class="container mt-4">
     <h2>Books:</h2>
-    <div class="row scrollable">
+    <div class="w-75 search-bar rounded my-2 theme-color-primary-milder-bg">
+      <input type="text" name="search" id="bookSearch" placeholder="Search Books..."
+        class="search-field theme-color-contrast-text">
+      <div class="search-button theme-color-contrast-text" type="none">
+        <external-svg src="/static/svg/functional/magnifying-glass.svg">
+      </div>
+    </div>
+    <div id="flashMessage" class="alert alert-info theme-color-primary-mild-bg theme-color-contrast-text"
+      style="display: none;"></div>
+    <div id="booksContainer" class="books-container row scrollable">
       {% for book in books %}
       <div class="mb-3 w-100">
         <div class="card mb-2 theme-color-primary-mild-bg theme-color-contrast-text">
