@@ -54,7 +54,7 @@ def process_login():
     potential_user = User.get_by_email(request.form)
     if not potential_user:
         flash('Invalid credentials. Try again.', 'log')
-        return redirect('/')
+        return redirect('/login_registration')
     elif not bcrypt.check_password_hash(potential_user.password, request.form['password']):
         flash('Invalid credentials. Try again.', 'log')
         return redirect('/')
