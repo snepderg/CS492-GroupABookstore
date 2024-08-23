@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const hiddenInput = document.getElementById('selectedGenre');
 
     // Check if elements exist
-    if (!genreDropdown || !genreList || !hiddenInput) {
+    if (!genreDropdownMenuButton || !genreList || !hiddenInput) {
         console.error('One or more elements not found');
         return;
     }
