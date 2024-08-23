@@ -33,7 +33,7 @@ class Book:
         WHERE id = %(id)s;
     """
     return connectToMySQL(cls.db).query_db(query, data)
-  
+
   @classmethod
   def update_book_quantity(cls, data):
     query = """
@@ -68,6 +68,40 @@ class Book:
     if len(result) < 1:
       return False
     return cls(result[0])
+
+  @classmethod
+  def get_by_author(cls, data):
+    query = """
+      SELECT * FROM books WHERE author = %(author)s
+      """
+
+    if 'book_limit' in data:
+      query += " LIMIT %(book_limit)s"
+
+    query += ";"
+
+    results = connectToMySQL(cls.db).query_db(query, data)
+    books = []
+    for book in results:
+      books.append(cls(book))
+    return books
+
+  @classmethod
+  def get_by_genre(cls, data):
+    query = """
+      SELECT * FROM books WHERE genre = %(genre)s
+    """
+
+    if 'book_limit' in data:
+      query += " LIMIT %(book_limit)s"
+
+    query += ";"
+
+    results = connectToMySQL(cls.db).query_db(query, data)
+    books = []
+    for book in results:
+      books.append(cls(book))
+    return books
 
   @staticmethod
   def validate(data):
@@ -114,7 +148,7 @@ class Book:
         flash('Quantity must be greater than 0.')
 
     return is_valid
-  
+
   @staticmethod
   def validate_edit(data):
     is_valid = True
@@ -133,7 +167,7 @@ class Book:
         if one_creation.title.lower() == data['title'].lower() and this_creation.title.lower() != one_creation.title.lower():
           is_valid = False
           flash('Title already exists.')
-    
+
     # Description validation with keeping invalid user input
     if len(data['genre']) < 1:
         is_valid = False
