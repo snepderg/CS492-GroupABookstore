@@ -1,44 +1,40 @@
 // The purpose of this file is to add genre options and handle a dropdown menu for selecting a genre.
 
 document.addEventListener('DOMContentLoaded', function () {
-    const genreDropdown = document.getElementById('genreDropdownMenuButton');
-    const genreList = document.getElementById('genreList');
-    const hiddenInput = document.getElementById('selectedGenre');
+    const genreDropdown = document.getElementById('inquiryDropdownMenuButton');
+    const genreList = document.getElementById('inquiryList');
+    const hiddenInput = document.getElementById('selectedInquiry');
 
     // Check if elements exist
-    if (!genreDropdownMenuButton || !genreList || !hiddenInput) {
+    if (!inquiryDropdownMenuButton || !inquiryList || !hiddenInput) {
         console.error('One or more elements not found');
         return;
     }
 
     // Array of genres
-    const genres = [
-        "Children's",
-        "Fantasy",
-        "Historical Fiction",
-        "Horror",
-        "Mystery",
-        "Non-Fiction",
-        "Romance",
-        "Science Fiction",
-        "Thriller"
+    const topics = [
+        "Special Order",
+        "Shipping",
+        "Book Recommendation",
+        "Complaint/Concern",
+        "Other"
     ];
 
     // Populate the dropdown list with genres
-    genres.forEach(genre => {
+    topics.forEach(topic => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.className = 'dropdown-item fs-5';
         a.href = '#';
-        a.textContent = genre;
+        a.textContent = topic;
         li.appendChild(a);
         genreList.appendChild(li);
 
         // Add event listener to each item
         a.addEventListener('click', function (e) {
             e.preventDefault(); // Prevent the default anchor behavior
-            genreDropdown.querySelector('span').textContent = genre;
-            hiddenInput.value = genre;
+            genreDropdown.querySelector('span').textContent = topic;
+            hiddenInput.value = topic;
         });
     });
 });
