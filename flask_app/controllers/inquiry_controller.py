@@ -1,9 +1,12 @@
 from flask import flash, redirect, render_template, request, session, url_for
 
 from flask_app import app
-from flask_app.models.inquiries_model import Inquiry
+from flask_app.models.inquiry_model import Inquiry
 from flask_app.models.user_model import User
 
+def is_admin():
+  user = User.get_by_id({'id': session['user_id']})
+  return user.admin == 1
 
 @app.route('/contact_us')
 def contact_us():
