@@ -13,6 +13,7 @@ def contact_us():
 @app.route('/inquiry/new/process', methods=['POST'])
 def create_inquiry():
   Inquiry.create_inquiry(request.form)
+  flash('Inquiry submitted successfully!\nOur team will reach out to you soon.', 'info')
   return redirect('/dashboard')
 
 @app.route('/inquiries')
