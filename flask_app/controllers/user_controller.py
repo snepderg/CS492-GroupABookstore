@@ -7,6 +7,7 @@ from flask_app import app
 from flask_app.models.book_model import Book
 from flask_app.models.order_model import Order
 from flask_app.models.user_model import User
+from flask_app.models.inquiry_model import Inquiry
 
 bcrypt = Bcrypt(app)
 
@@ -98,4 +99,6 @@ def admin_dashboard():
     return redirect('/dashboard')
   one_user = User.get_by_id({'id':session['user_id']})
   books = Book.get_all()
-  return render_template('admin_dashboard.html', one_user = one_user, books = books)
+  concerns = Inquiry.view_all_inquiries()
+  print(concerns)
+  return render_template('admin_dashboard.html', one_user = one_user, books = books, concerns = concerns)
