@@ -1,5 +1,8 @@
+from flask import flash
+
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import user_model
+
 
 class Inquiry:
   db = 'page_turners'
@@ -74,3 +77,40 @@ class Inquiry:
       inquiry.reporter = user_model.User(user_data)
       print(inquiry.reporter.first_name)
     return inquiry
+  
+  @staticmethod
+  def validate(data):
+    is_valid = True
+
+    # First name validation
+    if len(data['first_name']) < 1:
+      is_valid = False
+      flash('First name is required.', 'reg')
+    elif len(data['first_name']) < 2:
+      is_valid = False
+      flash('First name must be at least 2 characters.', 'reg')
+
+    # Last name validation
+    if len(data['last_name']) < 1:
+      is_valid = False
+      flash('Last name is required.', 'inquiry')
+    elif len(data['last_name']) < 2:
+      is_valid = False
+      flash('Last name must be at least 2 characters.', 'reg')
+
+      # First name validation
+    if len(data['first_name']) < 1:
+      is_valid = False
+      flash('First name is required.', 'inquiry')
+    elif len(data['first_name']) < 2:
+      is_valid = False
+      flash('First name must be at least 2 characters.', 'inquiry')
+
+    # Category & description validation
+    if len(data['category']) < 1:
+      is_valid = False
+      flash('Category is required.', 'inquiry')
+    elif len(data['description']) < 5:
+      is_valid = False
+      flash('Description must be at least 5 characters.', 'inquiry')
+    return is_valid

@@ -5,9 +5,9 @@ from flask_bcrypt import Bcrypt
 
 from flask_app import app
 from flask_app.models.book_model import Book
+from flask_app.models.inquiry_model import Inquiry
 from flask_app.models.order_model import Order
 from flask_app.models.user_model import User
-from flask_app.models.inquiry_model import Inquiry
 
 bcrypt = Bcrypt(app)
 
@@ -65,7 +65,7 @@ def process_registration():
 def process_login():
     potential_user = User.get_by_email(request.form)
     if not potential_user:
-        flash('Invalid credentials. Try again.', 'log')
+        flash('Invalid credentials. Try again.', 'login')
         return redirect('/login_registration')
     elif not bcrypt.check_password_hash(potential_user.password, request.form['password']):
         flash('Invalid credentials. Try again.', 'log')

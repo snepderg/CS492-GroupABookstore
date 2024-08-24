@@ -40,6 +40,10 @@
           <p class="form-control w-50 fs-5">{{ concern.first_name }} {{concern.last_name }}</p>
         </div>
         <div class="d-flex justify-content-between mb-3">
+          <p class="fs-5">Email of Reporter</p>
+          <p class="form-control w-50 fs-5">{{ concern.reporter.email }}</p>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
           <p class="fs-5">Category</p>
           <p class="form-control w-50 fs-5">{{ concern.category }}</p>
         </div>
@@ -48,7 +52,7 @@
           <p class="form-control w-50 fs-5">{{ concern.description }}</p>
         </div>
         <div class="d-flex gap-3">
-          <a href="/dashboard" class="btn btn-lg btn-warning">Back</a>
+          <a href="/inquiries" class="btn btn-lg btn-warning">Back</a>
           {% if session['admin'] == 1 %}
             <a href="/inquiry/{{ concern.id }}/delete" class="btn btn-lg btn-primary" type="submit">Resolved</a>
           </form>
