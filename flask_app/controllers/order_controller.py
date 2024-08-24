@@ -47,24 +47,25 @@ def view_order(user_id):
 
 @app.route('/order/<int:book_order_id>/delete_book')
 def delete_book_from_order(book_order_id):
-  order = Order.get_by_id({'id':session['order_id']})
+  order = Order.get_one_with_books({'id':session['order_id']})
   book_in_order = Books_in_Order.find_one_entry({'id':book_order_id})
   book = Book.get_by_id({'id': book_in_order.book_id})
   Order.update_order({'id':session['order_id'],'total':(order.total - book.price)})
   Book.update_book_quantity({'id':book.id,'quantity_in_stock':book.quantity_in_stock + 1})
   Books_in_Order.delete_one_book({'id':book_order_id})
   print("what is the total", order.total)
+  print("length of books before if", len(order.books))
 
   if len(order.books) == 0:
+    print("length of books", len(order.books))
     Order.delete_order({'id':session['order_id']})
     print('***ORDER DELETED****')
     del session['order_id']
-    flash('Cart is empty') #or we can add this to the frontend with an if conditional
+    flash('Cart is empty')
     return redirect('/dashboard')
   else:
     flash(f'{book.title} removed from cart.')
   return redirect(f'/order/{session["user_id"]}/view')
 
-# delete book()
 
 

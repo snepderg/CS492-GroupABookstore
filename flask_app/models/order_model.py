@@ -7,8 +7,8 @@ class Order:
   def __init__(self, data):
     self.id = data['id']
     self.total = data['total']
-    # self.book_id = data['book_id']
     self.customer_id = data['customer_id']
+    self.order_number = data['order_number']
     self.books = []
     self.each_book = []
 
@@ -74,6 +74,7 @@ class Order:
       book = book_model.Book(book_data)
       print(book_data)
       order.books.append(book)
+    print("length of books from model", len(order.books))
     return order
   
   @classmethod
