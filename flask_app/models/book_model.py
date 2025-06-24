@@ -120,6 +120,12 @@ class Book:
         if one_book.title.lower() == data['title'].lower():
           is_valid = False
           flash('Title already exists.')
+    if len(data['author']) < 1:
+      is_valid = False
+      flash('Author is required.')
+    elif len(data['author']) < 2:
+        is_valid = False
+        flash('Author must be at least 2 characters.')
 
     # Genre validation with keeping invalid admin input
     if len(data['genre']) < 1:
@@ -167,6 +173,12 @@ class Book:
         if one_creation.title.lower() == data['title'].lower() and this_creation.title.lower() != one_creation.title.lower():
           is_valid = False
           flash('Title already exists.')
+    if len(data['author']) < 1:
+      is_valid = False
+      flash('Author is required.')
+    elif len(data['author']) < 2:
+        is_valid = False
+        flash('Author must be at least 2 characters.')
 
     # Description validation with keeping invalid user input
     if len(data['genre']) < 1:
